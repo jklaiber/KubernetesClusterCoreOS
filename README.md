@@ -111,7 +111,7 @@ PUBLIC_IP=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1 | head -n 
 ```
 kubeadm init --apiserver-advertise-address=$PUBLIC_IP  --pod-network-cidr=10.244.0.0/16
 ```
-** Important: ** Copy the join command from the command line!
+**Important:** Copy the join command from the command line!
 
 ### Access to the Cluster
 Connect your local kubectl to the master machine.    
