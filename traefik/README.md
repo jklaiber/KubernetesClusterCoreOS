@@ -8,7 +8,6 @@
 * [Adding Ingress to the Cluster](link)
 * [Implement Name-Based Routing](link)
   * [Serve different frontends under one domain](link)
-* [Implement Traffic Splitting](link)
 
 ## Service Accounts
 Create a new ServiceAccount for Traefik `traefik-service-acc.yaml`
@@ -171,7 +170,7 @@ Run `kubectl create -f traefik-ingress.yaml`
 **Note:** You have to point a DNS Entry to your Cluster IP to access the Traefik Web UI
 
 ## Implement Name-Based Routing
-We need for every deployment we make a service which Traefik use to expose the app.  
+We need for every deployment we make a service and a Ingress manifest which Traefik use to expose the app.  
 
 Make a new deployment
 ```yaml
@@ -257,5 +256,52 @@ spec:
     app: animals
     task: moose
 ```
+Create the ingress manifest
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: animals
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: bear.minikube
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: bear
+          servicePort: http
+  - host: moose.minikube
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: moose
+          servicePort: http
+```
 ### Serve different frontends under one domain
-## Implement Traffic Splitting
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: animals
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - host: animals.minikube
+    http:
+      paths:
+      - path: /bear
+        backend:
+          serviceName: bear
+          servicePort: http
+      - path: /moose
+        backend:
+          serviceName: moose
+          servicePort: http
+```
+Now we can access the applications with `animals.minikube/bear`

@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: animals
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: bear.minikube
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: bear
+          servicePort: http
+  - host: moose.minikube
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: moose
+          servicePort: http
