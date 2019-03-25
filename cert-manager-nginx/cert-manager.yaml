@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+  labels:
+    app: cert-manager
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cert-manager
+    spec:
+      serviceAccountName: cert-manager
+      containers:
+        - name: cert-manager
+          image: "quay.io/jetstack/cert-manager-controller:v0.2.3"
+          args: ["--cluster-resource-namespace","cert-manager"]
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi

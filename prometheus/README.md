@@ -2,12 +2,12 @@
 <img src="https://cdn-images-1.medium.com/max/800/1*zwH6_X8uWpXAzLt4FLdyOw.png" alt="Prometheus Logo" style="height: 105px"/>
 
 ## Content
-* [Grant Permissions](link)
-* [Deploy Prometheus](link)
-* [Access Prometheus](link)
-  * [With Expose](link)
-  * [With Traefik](link)
-  * [With Nginx](link)
+* [Grant Permissions](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus#grant-permissions)
+* [Deploy Prometheus](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus#deploy-prometheus)
+* [Access Prometheus](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus#access-prometheus)
+  * [With Expose](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus#with-expose)
+  * [With Traefik](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus#with-traefik)
+  * [With Nginx](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus#with-nginx)
 
 ## Grant Permissions
 Prometheus have to access pods, endpoints and services running in your cluster so we have to grant him this permissions.  

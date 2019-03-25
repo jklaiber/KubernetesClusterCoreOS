@@ -12,6 +12,7 @@
 - [x] Monitoring with Prometheus
 - [ ] Deploy with Ansible
 - [ ] Log management with Grafana/Kibana/Elasticsearch
+- [ ] SSL with Let's Encrypt (Certbot, SAN Certificat)
 
 ## Content
 * [Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeployment)
@@ -19,3 +20,4 @@
 * [Prometheus - Monitoring](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus)
 * [Traefik - Reverse Proxy](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/traefik)
 * [Ansible - Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ansible)
+* [Certificat - Deployment Nginx](link)

@@ -1,0 +1,24 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: your-app-cert
+  namespace: kube-system
+spec:
+  secretName: your-app-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: your-app.com
+  dnsNames:
+  - dev.your-app.com
+  - qa.your-app.com
+  - www.your-app.com
+  acme:
+    config:
+    - dns01:
+        provider: prod-dns
+      domains:
+      - your-app.com
+      - dev.your-app.com
+      - qa.your-app.com
+      - www.your-app.com
