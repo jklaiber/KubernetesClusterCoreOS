@@ -11,5 +11,5 @@
 - [x] Slack notification with kubewatch
 
 ## Content
-* [Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/blob/master/README.md#getting-started)
-* [Kubewatch](link)
+* [Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeployment)
+* [Kubewatch](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/kubewatch)
