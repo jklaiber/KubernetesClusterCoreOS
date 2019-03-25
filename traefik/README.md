@@ -5,6 +5,8 @@
 * [Service Accounts](link)
 * [Deploy Traefik](link)
 * [Create a Service](link)
+* [Adding Ingress to the Cluster](link)
+* [Implement Name-Based Routing](link)
 
 ## Service Accounts
 Create a new ServiceAccount for Traefik `traefik-service-acc.yaml`
@@ -106,3 +108,64 @@ Check if the Traefik Pods were successfully created:
 `kubectl --namespace=kube-system get pods`
 
 ## Create a Service
+We need services to access Pods from within or outside the cluster. We need a service to access Traefik Ingress Pods. Create a new file and call it `traefik-service.yaml`
+```yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: traefik-ingress-service
+  namespace: kube-system
+spec:
+  selector:
+    k8s-app: traefik-ingress-lb
+  ports:
+    - protocol: TCP
+      port: 80
+      name: web
+    - protocol: TCP
+      port: 8080
+      name: admin
+  type: NodePort
+```
+Run `kubectl create -f traefik-service.yaml`  
+
+## Adding Ingress to the Cluster
+Now we have to define the Ingress resource and a Service which exposes the Traefik Web UI. Create a new file and called it `traefik-webui.yaml`
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  selector:
+    k8s-app: traefik-ingress-lb
+  ports:
+  - name: web
+    port: 80
+    targetPort: 8080
+```
+Run `kubectl create -f traefik-webui.yaml`  
+
+Now create a new file called `traefik-ingress.yaml` which will route all request to `[Traefik Hostname]`
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  rules:
+  - host: [Traefik Hostname]
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: traefik-web-ui
+          servicePort: web
+```
+Run `kubectl create -f traefik-ingress.yaml`  
+
+**Note:** You have to point a DNS Entry to your Cluster IP to access the Traefik Web UI
+
+## Implement Name-Based Routing
