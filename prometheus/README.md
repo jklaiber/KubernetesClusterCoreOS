@@ -1,5 +1,5 @@
 # Monitor Cluster with Prometheus
-<img src="https://cdn-images-1.medium.com/max/800/1*zwH6_X8uWpXAzLt4FLdyOw.png" alt="Prometheus Logo" style="height: 125px"/>
+<img src="https://cdn-images-1.medium.com/max/800/1*zwH6_X8uWpXAzLt4FLdyOw.png" alt="Prometheus Logo" style="height: 105px"/>
 
 ## Content
 * [Grant Permissions](link)
@@ -155,7 +155,7 @@ spec:
   ports:
   - name: promui
     targetPort: 9090
-    port: 80
+    port: 9090
     protocol: TCP
   selector:
     app: prometheus
@@ -178,6 +178,6 @@ spec:
       - path: /
         backend:
           serviceName: prometheus-service
-          servicePort: http
+          servicePort: 9090
 ```
 Run `kubectl create -f prometheus-traefik-ingress.yml`
