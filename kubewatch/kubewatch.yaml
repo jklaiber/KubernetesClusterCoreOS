@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubewatch
+  namespace: monitoring
+spec:
+  containers:
+  - image: tuna/kubewatch:v0.0.1
+    imagePullPolicy: Always
+    name: kubewatch
+    volumeMounts:
+    - name: config-volume
+      mountPath: /root
+  - image: gcr.io/skippbox/kubectl:v1.3.0
+    args:
+      - proxy
+      - "-p"
+      - "8080"
+    name: proxy
+    imagePullPolicy: Always
+  restartPolicy: Always
+  serviceAccount: kubewatch
+  serviceAccountName: kubewatch
+  volumes:
+  - name: config-volume
+    configMap:
+      name: kubewatch
