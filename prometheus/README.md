@@ -7,6 +7,7 @@
 * [Access Prometheus](link)
   * [With Expose](link)
   * [With Traefik](link)
+  * [With Nginx](link)
 
 ## Grant Permissions
 Prometheus have to access pods, endpoints and services running in your cluster so we have to grant him this permissions.  
@@ -181,3 +182,6 @@ spec:
           servicePort: 9090
 ```
 Run `kubectl create -f prometheus-traefik-ingress.yml`
+## With Nginx
+Take the same files as with Traefik but change the following:  
+`kubernetes.io/ingress.class: nginx`

@@ -9,8 +9,9 @@
 - [ ] Configure own loadbalancing service
 - [x] Slack notification with kubewatch
 - [x] Reverse Proxy (Traefik)
-- [ ] Monitoring with Prometheus
+- [x] Monitoring with Prometheus
 - [ ] Deploy with Ansible
+- [ ] Log management with Grafana/Kibana/Elasticsearch
 
 ## Content
 * [Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeployment)
