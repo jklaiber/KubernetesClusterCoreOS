@@ -20,4 +20,4 @@
 * [Prometheus - Monitoring](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus)
 * [Traefik - Reverse Proxy](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/traefik)
 * [Ansible - Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ansible)
-* [Certificat - Deployment Nginx](link)
+* [Certificat - Deployment Nginx](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/cert-manager-nginx)
