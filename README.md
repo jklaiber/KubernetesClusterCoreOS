@@ -9,7 +9,11 @@
 - [ ] Configure own loadbalancing service
 - [ ] Make the dashboard public
 - [x] Slack notification with kubewatch
+- [ ] Reverse Proxy (Traefik)
+- [ ] Monitoring with Prometheus
 
 ## Content
 * [Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeployment)
-* [Kubewatch](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/kubewatch)
+* [Kubewatch Alerting](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/kubewatch)
+* [Prometheus Monitoring](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus)
+* [Traefik - Reverse Proxy](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/traefik)
