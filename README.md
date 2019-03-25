@@ -5,11 +5,11 @@
 - [x] Initial Deployment
 - [x] Nginx Ingress Deployment
 - [x] Dashboard Deployment
-- [ ] Reconfigure for baremetal Deployment
+- [x] Reconfigure for baremetal Deployment
 - [ ] Configure own loadbalancing service
 - [ ] Make the dashboard public
 - [x] Slack notification with kubewatch
-- [ ] Reverse Proxy (Traefik)
+- [x] Reverse Proxy (Traefik)
 - [ ] Monitoring with Prometheus
 
 ## Content
