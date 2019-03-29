@@ -22,6 +22,8 @@ spec:
         - mountPath: /var/lib/grafana
           name: grafana-storage
         env:
+        - name: GF_SERVER_DOMAIN
+          value: "grafana.cluster"
         - name: GF_SERVER_HTTP_PORT
           value: "3000"
         - name: GF_SECURITY_ADMIN_PASSWORD
