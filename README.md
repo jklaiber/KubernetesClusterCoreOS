@@ -12,7 +12,7 @@
 - [x] Monitoring with Prometheus
 - [ ] Deploy with Ansible
 - [ ] Log management with Grafana/Kibana/Elasticsearch
-- [ ] SSL with Let's Encrypt (Certbot, SAN Certificat)
+- [x] SSL with Let's Encrypt (Cert-Manager, SAN Certificat)
 
 ## Content
 * [Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeployment)

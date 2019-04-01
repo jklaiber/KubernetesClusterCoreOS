@@ -10,9 +10,13 @@ Add a label to the `kube-system` namespace to enable advanced resource validatio
 ```
 kubectl label namespace kube-system certmanager.k8s.io/disable-validation="true"
 ```
-Install the cert-manager via Helm
+Create a new namespace
 ```
-helm install --name cert-manager --namespace kube-system stable/cert-manager
+kubectl create namespace cert-manager
+```
+Install the cert-manager
+```
+kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.7/deploy/manifests/cert-manager.yaml
 ```
 Create a new file called `prod_issuer.yaml`
 ```yaml
