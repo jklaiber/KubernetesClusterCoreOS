@@ -15,7 +15,8 @@
 - [x] SSL with Let's Encrypt (Cert-Manager, SAN Certificat)
 
 ## Content
-* [Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeployment)
+* [Cluster Deployment - Flannel](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeploymentFlannel)
+* [Cluster Deployment - Calico](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeploymentCalico)
 * [Kubewatch - Alerting](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/kubewatch)
 * [Prometheus - Monitoring](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus)
 * [Traefik - Reverse Proxy](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/traefik)
