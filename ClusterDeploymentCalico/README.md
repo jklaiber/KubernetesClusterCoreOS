@@ -58,12 +58,12 @@ echo "Updating PATH ..."
 echo 'PATH="$PATH:/opt/bin"' > ~/.bashrc
 
 echo "Fix Digital Oceans private ip for routing"
-IFACE=eth1  # change to eth1 for DO's private network
-DROPLET_IP_ADDRESS=$(ip addr show dev $IFACE | awk 'match($0,/inet (([0-9]|\.)+).* scope global/,a) { print a[1]; exit }')
-echo $DROPLET_IP_ADDRESS  # check this, just in case
+IFACE=eth1
+DROPLET_IP_ADDRESS=$(ip addr show eth1 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
+echo $DROPLET_IP_ADDRESS
 
-sed -i '2s/^/Environment="KUBELET_EXTRA_ARGS=--node-ip='$DROPLET_IP_ADDRESS'"\n/' /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-# echo "KUBELET_EXTRA_ARGS=--node-ip=$DROPLET_IP_ADDRESS  " > /etc/default/kubelet # Use etc/default/kubelet config file instead
+echo "Create kubelet Environment file"
+echo "KUBELET_EXTRA_ARGS=--node-ip=$DROPLET_IP_ADDRESS" > /etc/default/kubelet
 
 systemctl daemon-reload
 systemctl restart kubelet
