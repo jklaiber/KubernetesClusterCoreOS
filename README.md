@@ -18,3 +18,6 @@
 * [Kubewatch - Alerting](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/kubewatch)
 * [Prometheus - Monitoring](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus)
 * [Certificat - Deployment Nginx](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/cert-manager-nginx)
+
+## Manuals
+* [kubectl commands](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/general)
