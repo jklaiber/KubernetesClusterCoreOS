@@ -130,14 +130,13 @@ kubectl get nodes
 ```
 
 #### Calico Network Plugin
-We want that our pods can communicate with each other, so we have to install a pod network add-on
+We want that our pods can communicate with each other, so we have to install a pod network add-on.  
+
+**Note:** The default network CIDR is `192.168.0.0/16`
 ```
-kubectl apply -f etcd-calico.yml
+kubectl apply -f https://docs.projectcalico.org/v3.5/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
 ```
-```
-kubectl apply -f calico.yml
-```
-**Note:** Change the IP address from the etcd server!
+**Important:** Check if the master is Ready after this deployment
 ## Worker Deployment
 ### Minimum Requirements
 - Stable version of CoreOS
@@ -162,3 +161,46 @@ Check the nodes (you should see the master and the workers)
 ```
 kubectl get nodes
 ```
+## Dashboard Deployment
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+```
+### Create Dashboard Admin ClusterRole
+Save this file as `k8s-admin-dashboard-user.yaml`
+```yaml
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kube-system
+```
+Run the command
+```
+kubectl apply -f ./k8s-admin-dashboard-user.yaml
+```
+### Access the dashboard
+```
+kubectl proxy
+```
+```
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+```
+Generate an access token
+```
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+```
+Use this token to connect with the dashboard

@@ -3,22 +3,18 @@
 
 ## ToDo's
 - [x] Initial Deployment
-- [x] Nginx Ingress Deployment
+- [ ] Nginx Ingress Deployment
 - [x] Dashboard Deployment
 - [x] Reconfigure for baremetal Deployment
 - [ ] Configure own loadbalancing service
-- [x] Slack notification with kubewatch
-- [x] Reverse Proxy (Traefik)
-- [x] Monitoring with Prometheus
+- [ ] Slack notification with kubewatch
+- [ ] Monitoring with Prometheus
 - [ ] Deploy with Ansible
 - [ ] Log management with Grafana/Kibana/Elasticsearch
-- [x] SSL with Let's Encrypt (Cert-Manager, SAN Certificat)
+- [ ] SSL with Let's Encrypt (Cert-Manager, SAN Certificat)
 
 ## Content
-* [Cluster Deployment - Flannel](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeploymentFlannel)
 * [Cluster Deployment - Calico](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeploymentCalico)
 * [Kubewatch - Alerting](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/kubewatch)
 * [Prometheus - Monitoring](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus)
-* [Traefik - Reverse Proxy](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/traefik)
-* [Ansible - Cluster Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ansible)
 * [Certificat - Deployment Nginx](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/cert-manager-nginx)
