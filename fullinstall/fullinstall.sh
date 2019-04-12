@@ -9,37 +9,39 @@ banner()
   echo "+------------------------------------------+"
 }
 
+# Array
+declare -a minion_ips
+
 banner "Starting the Job"
 sleep 1
 
 banner "Type in the IP Addresses"
-echo "Master IP:"
-read varmasterip
-echo "Minion1 IP:"
-read varminion1ip
-echo "Minion2 IP:"
-read varminion2ip
-echo "Minion3 IP:"
-read varminion3ip
+read -p "Master IP:" varmasterip
+read -p "Amount of Minions:" minion_amount
+for (( i=1; i<=$minion_amount; i++ ))
+do
+   read -p "Set Minion $i ip address:" temp_ip
+   minion_ips[$i]=$temp_ip
+done
 sleep 1
 
 banner "Check IP Addresses"
 ping -c 3 $varmasterip
-ping -c 3 $varminion1ip
-ping -c 3 $varminion2ip
-ping -c 3 $varminion3ip
+for j in "${minion_ips[@]}"
+do
+	ping -c 3 $j
+done
 sleep 1
 
 banner "Install Kubernetes Deployment"
 banner "Install Kubernetes Deployment - $varmasterip"
 ssh core@$varmasterip "bash -s" < ./install-k8s.sh
-banner "Install Kubernetes Deployment - $varminion1ip"
-ssh core@$varminion1ip "bash -s" < ./install-k8s.sh
-banner "Install Kubernetes Deployment - $varminion2ip"
-ssh core@$varminion2ip "bash -s" < ./install-k8s.sh
-banner "Install Kubernetes Deployment - $varminion3ip"
-ssh core@$varminion3ip "bash -s" < ./install-k8s.sh
-sleep 3
+for y in "${minion_ips[@]}"
+do
+	banner "Install Kubernetes Deployment - $y"
+  ssh core@$y "bash -s" < ./install-k8s.sh
+done
+sleep 1
 
 banner "Initialize Master"
 ssh core@$varmasterip 'sudo kubeadm init --apiserver-advertise-address=$(ip -f inet -o addr show eth0|cut -d\  -f 7 | cut -d/ -f 1 | head -n 1) --pod-network-cidr=192.168.0.0/16'
@@ -62,9 +64,11 @@ kubectl apply -f https://docs.projectcalico.org/v3.5/getting-started/kubernetes/
 banner "Join Nodes to Cluster"
 jointoken=`ssh core@$varmasterip 'sudo kubeadm token create --print-join-command'`
 echo $jointoken
-ssh core@$varminion1ip sudo $jointoken
-ssh core@$varminion2ip sudo $jointoken
-ssh core@$varminion3ip sudo $jointoken
+
+for z in "${minion_ips[@]}"
+do
+	ssh core@$z sudo $jointoken
+done
 
 banner "Deploy Dashboard"
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
