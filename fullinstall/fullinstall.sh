@@ -81,6 +81,7 @@ echo $jointoken
 
 for z in "${minion_ips[@]}"
 do
+  banner "Join Minion - $z"
 	ssh core@$z sudo $jointoken
 done
 
