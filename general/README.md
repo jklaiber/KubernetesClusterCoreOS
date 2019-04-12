@@ -5,7 +5,9 @@
 * [List](link)
 * [Describe](link)
 * [Scaling](link)
+* [Delete](link)
 * [Debug](link)
+* [Dashboard Token](link)
 
 **Note:** Get more commands from the official **[cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)**
 
@@ -60,6 +62,12 @@
 [user@localhost]$ kubectl scale --replicas=<number of replicas> <pod name 1> <pod name 2>  
 ```
 
+## Delete
+```bash
+#
+[user@localhost]$
+```
+
 ## Debug
 
 **Watch**
@@ -80,4 +88,9 @@
 ```bash
 # You must give the name of the namespace
 [user@localhost]$ kubectl logs -n <namespace> <pod name>
+```
+
+## Dashboard Token
+```bash
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 ```
