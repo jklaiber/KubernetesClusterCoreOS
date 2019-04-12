@@ -29,9 +29,25 @@ banner "Check IP Addresses"
 ping -c 3 $varmasterip
 for j in "${minion_ips[@]}"
 do
-	ping -c 3 $j
+  ((count = 10))                            # Maximum number to try.
+  while [[ $count -ne 0 ]] ; do
+      ping -c 1 $j                      # Try once.
+      rc=$?
+      if [[ $rc -eq 0 ]] ; then
+          ((count = 1))                      # If okay, flag to exit loop.
+      fi
+      ((count = count - 1))                  # So we don't go forever.
+  done
+
+  if [[ $rc -eq 0 ]] ; then                  # Make final determination.
+      echo `say Host is Reachable.`
+  else
+      echo `say Timeout.`
+  fi
 done
 sleep 1
+
+
 
 banner "Install Kubernetes Deployment"
 banner "Install Kubernetes Deployment - $varmasterip"
