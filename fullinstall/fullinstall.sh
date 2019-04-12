@@ -16,11 +16,11 @@ banner "Starting the Job"
 sleep 1
 
 banner "Type in the IP Addresses"
-read -p "Master IP:" varmasterip
-read -p "Amount of Minions:" minion_amount
+read -p "Master IP: " varmasterip
+read -p "Amount of Minions: " minion_amount
 for (( i=1; i<=$minion_amount; i++ ))
 do
-   read -p "Set Minion $i ip address:" temp_ip
+   read -p "Set Minion $i ip address: " temp_ip
    minion_ips[$i]=$temp_ip
 done
 sleep 1
@@ -47,8 +47,6 @@ do
 done
 sleep 1
 
-
-
 banner "Install Kubernetes Deployment"
 banner "Install Kubernetes Deployment - $varmasterip"
 ssh core@$varmasterip "bash -s" < ./install-k8s.sh
@@ -72,10 +70,10 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 echo "kubectl finished"
 
 banner "Check Master & kubectl"
-kubectl get nodes
+ssh core@$varmasterip 'kubectl get nodes'
 
 banner "Installing Calico Network"
-kubectl apply -f https://docs.projectcalico.org/v3.5/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
+ssh core@$varmasterip 'kubectl apply -f https://docs.projectcalico.org/v3.5/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml'
 
 banner "Join Nodes to Cluster"
 jointoken=`ssh core@$varmasterip 'sudo kubeadm token create --print-join-command'`
@@ -87,10 +85,10 @@ do
 done
 
 banner "Deploy Dashboard"
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
-kubectl apply -f ./k8s-admin-dashboard-user.yaml
+ssh core@$varmasterip 'kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml'
+ssh core@$varmasterip 'kubectl apply -f ./k8s-admin-dashboard-user.yaml'
 
 banner "Generate Access Token"
-kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+ssh core@$varmasterip 'kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')'
 
 banner "Finished."
