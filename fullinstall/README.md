@@ -2,10 +2,10 @@
 The following Script will deploy a working Kubernetes Cluster.
 
 ## Requirements
-* One Master Node (CoreOS)
-* One or more Minion Nodes (CoreOS)
-* All Nodes must be accessible with SSH
-* You must know the Public IP Addresses (or Internal)
+* **One** Master Node (**CoreOS**)
+* **One** or **more** Minion Nodes (**CoreOS**)
+* All Nodes must be accessible with **SSH**
+* You must know the Public **IP** Addresses (or Internal)
 
 ## Getting Started
 Simply Clone this repo and navigate into the fullinstall folder
