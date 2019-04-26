@@ -14,6 +14,7 @@
 - [ ] SSL with Let's Encrypt (Cert-Manager, SAN Certificat)
 
 ## Content
+* [OneClick Deployment](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/fullinstall)
 * [Cluster Deployment - Calico](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/ClusterDeploymentCalico)
 * [Kubewatch - Alerting](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/kubewatch)
 * [Prometheus - Monitoring](https://github.com/jklaiber/KubernetesClusterCoreOS/tree/master/prometheus)
