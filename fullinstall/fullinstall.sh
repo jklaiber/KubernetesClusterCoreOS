@@ -26,23 +26,39 @@ done
 sleep 1
 
 banner "Check IP Addresses"
-ping -c 3 $varmasterip
+# check master reachability
+((count1 = 10))                          
+while [[ $count -ne 0 ]] ; do
+    ping -c 1 $varmasterip
+    rc=$?
+    if [[ $rc -eq 0 ]] ; then
+        ((count1 = 1))
+    fi
+    ((count1 = count1 - 1))
+done
+
+if [[ $rc -eq 0 ]] ; then
+    echo "Host is Reachable."
+else
+    echo "Timeout."
+fi
+# Check minion reachability
 for j in "${minion_ips[@]}"
 do
-  ((count = 10))                            # Maximum number to try.
+  ((count = 10))
   while [[ $count -ne 0 ]] ; do
-      ping -c 1 $j                      # Try once.
+      ping -c 1 $j
       rc=$?
       if [[ $rc -eq 0 ]] ; then
-          ((count = 1))                      # If okay, flag to exit loop.
+          ((count = 1))
       fi
-      ((count = count - 1))                  # So we don't go forever.
+      ((count = count - 1))
   done
 
-  if [[ $rc -eq 0 ]] ; then                  # Make final determination.
-      echo `say Host is Reachable.`
+  if [[ $rc -eq 0 ]] ; then
+      echo "Host is Reachable."
   else
-      echo `say Timeout.`
+      echo "Timeout."
   fi
 done
 sleep 1
